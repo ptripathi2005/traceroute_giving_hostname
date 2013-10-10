@@ -40,7 +40,6 @@ static int addrcmp(const void *a,  const void *b)
  */
 void printaddr(struct in_addr *addrs, const size_t addrc)
 {
-	char temp_buf[90] = {0};
 	struct hostent *hp;
 	long addr; 
 	uint i = 0;
@@ -50,7 +49,7 @@ void printaddr(struct in_addr *addrs, const size_t addrc)
 	
 	printf("%15s | ", addrc == 0 ? "*" : inet_ntoa(addrs[0]));
 	addr = inet_addr(inet_ntoa(addrs[0]));
-	if (hp = gethostbyaddr((char *) &addr, sizeof(addr), AF_INET)) {
+	if ((hp = gethostbyaddr((char *) &addr, sizeof(addr), AF_INET))) {
 		printf("\t%s ", hp->h_name);
 	}
 	for ( i = 1; i < addrc; i++) {
